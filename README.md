@@ -7,10 +7,10 @@
 ---
 
 ## Key Features
-- ✅ **Real-time scam detection**
-- ⚙️ **Multi-model voting** (Random Forest, Decision Tree, XGBoost, KNN)
-- 🧠 **Fine-tuned LLaMA 3.1 8B** (LoRA optimized)
-- 📄 Includes scam examples for reference
+- **Real-time scam detection**
+- **Multi-model voting** (Random Forest, Decision Tree, XGBoost, KNN)
+- **Fine-tuned LLaMA 3.1 8B** (LoRA optimized)
+- Includes scam examples for reference
 
 ---
 
@@ -26,10 +26,7 @@ The core of the system is a hierarchical approach:
 ## System Workflow
 
 
----
 
-
----
 
 ## Running the Project
 
