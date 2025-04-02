@@ -2,7 +2,8 @@
 
 **Scam Shield** is an AI-driven scam detection tool designed to identify both obvious and adversarial scam messages. It implements the research methodology presented in the paper **"Scam Shield: Multi-Model Voting and Fine-Tuned LLMs Against Adversarial Attacks" (ECML PKDD 2025)**.
 
-🔗 [Research Paper](https://drive.google.com/file/d/1f6by7dW2KReFLf6SulkOSldrE9_sRKgY/view) 
+🔗 [Research Paper: Exposing LLM Vulnerabilities: Adversarial Scam Detection and Performance](https://ieeexplore.ieee.org/abstract/document/10825256) 
+🔗 [Research Paper: Scam Shield: Multi-Model Voting and Fine-Tuned LLMs Against Adversarial Attacks](https://drive.google.com/file/d/1f6by7dW2KReFLf6SulkOSldrE9_sRKgY/view) 
 
 ![homepage](pic/index.png)
 
