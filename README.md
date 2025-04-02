@@ -4,6 +4,10 @@
 
 🔗 [Research Paper](https://drive.google.com/file/d/1f6by7dW2KReFLf6SulkOSldrE9_sRKgY/view) 
 
+![homepage](pic/index.png)
+
+![research page](pic/research.png)
+
 ---
 
 ## Key Features
@@ -24,7 +28,7 @@ The core of the system is a hierarchical approach:
 ---
 
 ## System Workflow
-
+![Flowchart](pic/flowchartpic.png)
 
 
 
