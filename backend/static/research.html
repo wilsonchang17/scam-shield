@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research Papers - Virginia Tech Scam Shield</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+         <header class="vt-header">
+            <div class="header-left">
+                <h1 class="vt-title">Scam Shield</h1>
+            </div>
+            <div class="header-right">
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="index.html" >Scam Detector</a></li>
+                        <li><a href="research.html" class="active">Research Papers</a></li>
+                    </ul>
+                </nav>
+                <div class="partner-logos">
+                    <img src="images/vt.png" alt="Virginia Tech Logo" class="vt-logo">
+                    <img src="images/gmu.png" alt="George Mason University Logo" class="partner-logo">
+                    <img src="images/indiana.png" alt="Indiana University Logo" class="partner-logo">
+                    <img src="images/cci.png" alt="Commonwealth Cyber Initiative Logo" class="cci-logo">
+                </div>
+            </div>
+        </header>
+        
+        <main>
+            <div class="intro-section">
+                <h2>Research Publications</h2>
+                <p>Our research focuses on developing advanced methods for detecting scam messages, especially those crafted to evade traditional detection systems.</p>
+            </div>
+            
+            <div class="papers-container">
+                <div class="paper-card">
+                    <div class="paper-header">
+                        <h3>Exposing LLM Vulnerabilities: Adversarial Scam Detection and Performance</h3>
+                        <span class="paper-date">2024</span>
+                    </div>
+                    
+                    <div class="conference-info">
+                        <p>2024 IEEE International Conference on Big Data, Washington, DC, USA</p>
+                    </div>
+                    
+                    <div class="paper-authors">
+                        <p class="authors-list">
+                            Chen-Wei Chang<sup>*</sup>, Shailik Sarkar<sup>*</sup>, Shutonu Mitra<sup>*</sup>, Qi Zhang<sup>*</sup>, 
+                            Hossein Salemi<sup>†</sup>, Hemant Purohit<sup>†</sup>, Fengxiu Zhang<sup>‡</sup>,
+                            Michin Hong<sup>§</sup>, Jin-Hee Cho<sup>*</sup>, Chang-Tien Lu<sup>*</sup>
+                        </p>
+                        <div class="author-affiliations">
+                            <p><sup>*</sup>Department of Computer Science, Virginia Tech, USA</p>
+                            <p><sup>†</sup>Department of Information Sciences and Technology, George Mason University, USA</p>
+                            <p><sup>‡</sup>School of Policy and Government, George Mason University, USA</p>
+                            <p><sup>§</sup>School of Social Work, Indiana University, USA</p>
+                        </div>
+                    </div>
+                    
+                    <div class="paper-abstract">
+                        <h4>Abstract</h4>
+                        <p>Can we trust Large Language Models (LLMs) to accurately predict scam? This paper investigates the vulnerabil- ities of LLMs when facing adversarial scam messages for the task of scam detection. We addressed this issue by creating a comprehensive dataset with fine-grained labels of scam messages, including both original and adversarial scam messages. The dataset extended traditional binary classes for the scam detection task into more nuanced scam types. Our analysis showed how adversarial examples took advantage of vulnerabilities of a LLM, leading to high misclassification rate. We evaluated the performance of LLMs on these adversarial scam messages and proposed strategies to improve their robustness.</p>
+                    </div>
+                    
+                    <div class="paper-highlights">
+                        <h4>Key Contributions</h4>
+                        <ul>
+                            <li>Created a fine-grained labeled dataset with original and adversarial scam messages</li>
+                            <li>Designed a structured method to generate adversarial examples using prompt engineering</li>
+                            <li>Benchmarked LLMs like GPT-3.5, Claude3, and LLaMA on scam detection across multiple categories</li>
+                            <li>Identified performance degradation patterns under adversarial settings</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="paper-links">
+                        <a href="https://drive.google.com/file/d/1IbdVpY08Yaos92FuiwR8_WsgTzVf-_wl/view" class="paper-link">View PDF</a>
+                        <a href="https://ieeexplore.ieee.org/abstract/document/10825256" class="paper-link">View on IEEE</a>
+                    </div>
+                </div>
+                
+                <div class="paper-card">
+                    <div class="paper-header">
+                        <h3>Scam Shield: Multi-Model Voting and Fine-Tuned LLMs Against Adversarial Attacks</h3>
+                        <span class="paper-date">2025</span>
+                    </div>
+                    
+                    <div class="conference-info">
+                        <p>2025 European Conference on Machine Learning and Principles and Practice of Knowledge Discovery in Databases</p>
+                    </div>
+                    
+                    <div class="paper-authors">
+                        <p class="authors-list">
+                            Chen-Wei Chang<sup>*</sup>, Shailik Sarkar<sup>*</sup>, Hossein Salemi<sup>†</sup>, 
+                            Shutonu Mitra<sup>*</sup>, Hyungmin Kim<sup>*</sup>, Hemant Purohit<sup>†</sup>,
+                            Fengxiu Zhang<sup>‡</sup>, Michin Hong<sup>§</sup>, Jin-Hee Cho<sup>*</sup>, Chang-Tien Lu<sup>*</sup>
+                        </p>
+                        <div class="author-affiliations">
+                            <p><sup>*</sup>Department of Computer Science, Virginia Tech, USA</p>
+                            <p><sup>†</sup>Department of Information Sciences and Technology, George Mason University, USA</p>
+                            <p><sup>‡</sup>School of Policy and Government, George Mason University, USA</p>
+                            <p><sup>§</sup>School of Social Work, Indiana University, USA</p>
+                        </div>
+                    </div>
+                    
+                    <div class="paper-abstract">
+                        <h4>Abstract</h4>
+                        <p>Scam detection remains a critical challenge in cybersecurity, especially with the increasing sophistication of adversarial scam messages designed to evade detection. This work proposes a Hierarchical Scam Detection System (HSDS) that integrates multi-model voting with a fine-tuned LLaMA 3.1 8B Instruct model to improve detection accuracy and robustness against adversarial attacks. Our approach leverages a four-model ensemble for initial scam classification, where each model independently evaluates scam messages, and a majority voting mechanism determines preliminary predictions. The final classification is refined using a fine-tuned LLaMA 3.1 8B Instruct model, optimized through adversarial training to mitigate misclassification risks. Experimental results demonstrate that our hierarchical framework significantly enhances scam detection performance, surpassing both traditional machine learning models and larger proprietary LLMs, such as GPT-3.5 Turbo, while maintaining computational efficiency. The findings highlight the effectiveness of a hybrid voting mechanism and adversarial fine-tuning in fortifying LLMs against evolving scam tactics, enhancing the resilience of automated scam detection systems.</p>
+                    </div>
+                    
+                    <div class="paper-highlights">
+                        <h4>Key Contributions</h4>
+                        <ul>
+                            <li>Proposed a hybrid detection system combining four ML models with a fine-tuned LLaMA 8B</li>
+                            <li>Introduced efficient LoRA-based fine-tuning for adversarial robustness</li>
+                            <li>Created a 20K-sample scam dataset with adversarial examples</li>
+                            <li>Benchmarked detection accuracy across various scam types</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="paper-links">
+                        <a href="https://drive.google.com/file/d/1f6by7dW2KReFLf6SulkOSldrE9_sRKgY/view" class="paper-link">View PDF</a>
+                    </div>
+                </div>
+            </div>
+            
+            
+        </main>
+        
+        <footer>
+            <p>© 2025 Virginia Tech. Research project by the Commonwealth Cyber Initiative.</p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,23 @@
+# Web Framework
+fastapi>=0.95.0
+uvicorn>=0.22.0
+pydantic>=1.10.7
+
+# Machine Learning
+scikit-learn>=1.2.2
+xgboost==2.1.4  # Specific version range for Mac compatibility
+joblib>=1.2.0
+
+# Data Processing
+numpy>=1.24.3
+pandas>=2.0.1
+
+# LLM Integration (assuming you use OpenAI API or similar)
+openai>=0.27.8
+requests>=2.29.0
+python-dotenv>=1.0.0
+
+# PyTorch and Hugging Face Transformers
+torch>=2.0.0
+transformers>=4.48.0
+peft>=0.14.0

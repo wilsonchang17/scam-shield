@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scam Shield - Virginia Tech</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="vt-header">
+            <div class="header-left">
+                <h1 class="vt-title">Scam Shield</h1>
+            </div>
+            <div class="header-right">
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="index.html" class="active">Scam Detector</a></li>
+                        <li><a href="research.html">Research Papers</a></li>
+                    </ul>
+                </nav>
+                <div class="partner-logos">
+                    <img src="images/vt.png" alt="Virginia Tech Logo" class="vt-logo">
+                    <img src="images/gmu.png" alt="George Mason University Logo" class="partner-logo">
+                    <img src="images/indiana.png" alt="Indiana University Logo" class="partner-logo">
+                    <img src="images/cci.png" alt="Commonwealth Cyber Initiative Logo" class="cci-logo">
+                </div>
+            </div>
+        </header>
+        
+        <main>
+            <div class="intro-section">
+                <h2>Protect Yourself from adversarial scam messages attack</h2>
+                <p>Enter a message to check if it's a potential scam. Our AI-powered system will analyze the content and provide an assessment.</p>
+            </div>
+            
+            <div class="analysis-section">
+                <div class="input-container">
+                    <textarea id="message" placeholder="Paste suspicious message here..."></textarea>
+                    <button onclick="checkMessage()" class="vt-button">Analyze Message</button>
+                </div>
+                
+                <div id="result-container" class="hidden">
+                    <h3>Analysis Result:</h3>
+                    <div id="result">Result will appear here</div>
+                    <div class="result-explanation">
+                        <p id="explanation"></p>
+                    </div>
+                </div>
+            </div>
+            
+    
+
+            <div class="examples-section">
+                <h3>Examples of Scam Messages</h3>
+                <p class="example-intro">Scammers are becoming more sophisticated. Below are examples of obvious and adversarial scams:</p>
+                
+                <div class="example-container">
+                    <div class="example-box">
+                        <h4>Obvious Scam Example</h4>
+                        <div class="example-content">
+                            <p>We are an investment and loan financing group. We fund economically viable projects at 2% interest rate for 1-10 years and 6-12 months grace period. Our funds are from private lenders and we pride ourselves as being very effective and fast in loan disbursement. I can be reached on email and Whatsapp: +97155 647 4204. Contact us for more details.</p>
+                            <p>Regards,<br>MA<br>Financial Consultant</p>
+                        </div>
+                        <div class="example-indicators">
+                            <p><strong>Red flags:</strong> Unrealistically low interest rate, foreign phone number, vague details, unsolicited offer</p>
+                        </div>
+                    </div>
+                    
+                    <div class="example-box adversarial">
+                        <h4>Adversarial Scam Example</h4>
+                        <div class="example-content">
+                            <p>I hope this message finds you well. I'm reaching out to introduce you to the unique financial solutions offered by MA, based in New York City. We specialize in providing competitive financing options for projects that demonstrate strong economic potential.</p>
+                            <p><strong>Our Offer:</strong></p>
+                            <ul>
+                                <li>Interest Rates: Competitive rates of 2-6% for loan terms ranging from 1-10 years.</li>
+                                <li>Flexibility: We offer a grace period of 6-12 months, depending on the project's specifics.</li>
+                            </ul>
+                            <p><strong>Why Choose Us?</strong><br>
+                            At MA, we pride ourselves on our efficiency, transparency, and the speed of our loan disbursement process. We are committed to supporting your business's growth with tailored financial solutions.</p>
+                            <p>For a detailed discussion or to apply for financing, please contact me directly at sseanh@gmail.com or +9 7155 647 4204.</p>
+                            <p>Thank you for considering MA for your financial needs. We look forward to the opportunity to support your ventures.</p>
+                            <p>Warm regards,<br>James Armitage<br>MA, Financial Consultant</p>
+                        </div>
+                        <div class="example-indicators">
+                            <p><strong>Hidden red flags:</strong> Still offering unusually low interest rates, generic company name ("MA"), no verifiable company information, personal email address instead of corporate email</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <footer>
+            <p>© 2025 Virginia Tech. Research project by the Commonwealth Cyber Initiative.</p>
+        </footer>
+    </div>
+
+    <script>
+        async function checkMessage() {
+            const message = document.getElementById('message').value.trim();
+            if (message === '') {
+                alert('Please enter a message to analyze.');
+                return;
+            }
+        
+            document.getElementById('result-container').classList.add('hidden');
+            
+            try {
+                const response = await fetch('/classify', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ text: message }),
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                const resultElement = document.getElementById('result');
+                const explanationElement = document.getElementById('explanation');
+                
+                resultElement.textContent = data.label;
+                resultElement.className = data.label === 'Scam' ? 'scam' : 'not-scam';
+                
+                explanationElement.textContent = data.label === 'Scam' 
+                    ? 'This message contains elements commonly associated with scams. Be cautious!'
+                    : 'This message appears legitimate based on our analysis.';
+                
+                document.getElementById('result-container').classList.remove('hidden');
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred while analyzing the message.');
+            }
+        }
+    </script>
+</body>
+</html>
