@@ -10,7 +10,6 @@
 
 ![homepage](pic/index.png)
 
-
 ---
 
 ## Key Features
@@ -19,7 +18,7 @@
 - **Fine-tuned LLaMA 3.1 8B** (LoRA optimized)
 - Includes scam examples for reference
 
----
+
 
 ## Background
 This tool is based on advanced research aimed at detecting sophisticated scams, including adversarial attacks crafted to evade detection by traditional methods.
@@ -28,7 +27,6 @@ The core of the system is a hierarchical approach:
 - **Step 1:** Majority voting by traditional ML classifiers.
 - **Step 2:** Fine-tuned LLM (LLaMA 8B) provides final verification and resolves uncertain cases.
 
----
 
 ## System Workflow
 ![Flowchart](pic/flowchartpic.png)
@@ -49,7 +47,7 @@ uvicorn app:app --reload
 
 
 
----
+
 
 ## Model Performance (from Paper)
 | Method                 | Accuracy | Precision | Recall | F1-score |
@@ -57,7 +55,7 @@ uvicorn app:app --reload
 | LLaMA 8B (Fine-Tuned)  | 0.87     | 0.89      | 0.82   | 0.86     |
 | Voting + LLaMA         | **0.90** | **0.95**  | 0.80   | **0.90** |
 
----
+
 
 ## Acknowledgments
 Research collaboration between:
