@@ -37,7 +37,7 @@ The core of the system is a hierarchical approach:
 
 1. **Install Dependencies**
 ```bash
-pip install flask transformers peft sklearn
+pip install -r requirements.txt
 ```
 
 2. **Run Backend**
@@ -45,7 +45,7 @@ pip install flask transformers peft sklearn
 uvicorn app:app --reload
 ```
 
-3. **Open** `index.html` **in browser**
+
 
 ---
 
