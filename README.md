@@ -6,9 +6,10 @@
 
 🔗 [Research Paper: Scam Shield: Multi-Model Voting and Fine-Tuned LLMs Against Adversarial Attacks](https://drive.google.com/file/d/1f6by7dW2KReFLf6SulkOSldrE9_sRKgY/view) 
 
+![research page](pic/research.png)
+
 ![homepage](pic/index.png)
 
-![research page](pic/research.png)
 
 ---
 
