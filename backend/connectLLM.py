@@ -6,19 +6,10 @@ class ScamShieldClient:
     """
     
     def __init__(self):
-        """Initialize the client connection to the ScamShield API."""
         self.client = Client("wilsonchang17/scamshield-api")
     
     def predict_message(self, message):
-        """
-        Send a message to the ScamShield API for prediction.
-        
-        Args:
-            message (str): The message to analyze for scam detection
-            
-        Returns:
-            The prediction result from the API
-        """
+
         try:
             result = self.client.predict(
                 message=message,
@@ -29,7 +20,7 @@ class ScamShieldClient:
             print(f"Error making prediction: {e}")
             return None
 
-# Example usage
+# Testing
 if __name__ == "__main__":
     # This code only runs if the script is executed directly
     scam_shield = ScamShieldClient()
