@@ -223,33 +223,43 @@ textarea:focus {
 #result {
     font-size: 1.6em;
     font-weight: 700;
-    padding: 10px 15px;
+    padding: 15px 20px;
     border-radius: 4px;
     display: inline-block;
     margin-bottom: 15px;
+    text-align: center;
+    min-width: 150px;
 }
 
 .result-explanation {
-    font-size: 1em;
+    font-size: 1.1em;
     line-height: 1.5;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.scam-explanation {
+    background-color: #FFF0F0;
+    border-left: 3px solid var(--scam-red);
+}
+
+.safe-explanation {
+    background-color: #F0FFF4;
+    border-left: 3px solid var(--safe-green);
 }
 
 .scam {
     background-color: #FFF0F0;
     color: var(--scam-red);
-    border: 2px solid var(--scam-red);
+    border: 3px solid var(--scam-red);
+    box-shadow: 0 0 10px rgba(199, 44, 65, 0.2);
 }
 
 .not-scam {
     background-color: #F0FFF4;
     color: var(--safe-green);
-    border: 2px solid var(--safe-green);
-}
-
-.error {
-    background-color: #FFF9F0;
-    color: #E67E22;
-    border: 2px solid #E67E22;
+    border: 3px solid var(--safe-green);
+    box-shadow: 0 0 10px rgba(45, 147, 108, 0.2);
 }
 
 /* Examples Section */
@@ -370,7 +380,7 @@ textarea:focus {
 
 /* Fix any potential overflow in paper cards */
 .paper-card {
-    width: 60%;
+    width: 95%;  
     max-width: 100%;
     box-sizing: border-box;
     background-color: white;
@@ -641,6 +651,28 @@ footer p {
     .partner-logo, .cci-logo {
         height: 30px;
     }
+
+    /* Make boxes larger */
+    .paper-card, 
+    .example-box, 
+    .methodology-box {
+        width: 95%;
+        padding: 20px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    /* Increase text size instead of reducing */
+    body {
+        font-size: 1em; /* Changed from 0.95em */
+    }
+    
+    .paper-abstract p,
+    .paper-highlights li,
+    .example-content,
+    .methodology-box p {
+        font-size: 0.95em; /* Changed from 0.9em */
+    }
 }
 
 @media (max-width: 480px) {
@@ -649,15 +681,15 @@ footer p {
     }
     
     .intro-section h2 {
-        font-size: 1.5em;
+        font-size: 1.65em; /* Increased from 1.5em */
     }
     
     .intro-section p {
-        font-size: 1em;
+        font-size: 1.1em; /* Increased from 1em */
     }
     
     #result {
-        font-size: 1.3em;
+        font-size: 1.5em; /* Increased from 1.3em */
     }
     
     .vt-button {
@@ -673,11 +705,67 @@ footer p {
     .partner-logo, .cci-logo {
         height: 25px;
     }
+
+    /* Larger text for better readability on mobile */
+    body {
+        font-size: 1.05em; /* Changed from 0.9em to 1.05em */
+    }
+    
+    .vt-title {
+        font-size: 1.7em; /* Increased from 1.5em */
+    }
+    
+    /* Make content boxes larger */
+    .paper-card, 
+    .analysis-section,
+    .example-box {
+        width: 98%;
+        padding: 15px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    /* Larger text in specific components */
+    .paper-abstract p, 
+    .paper-highlights li,
+    .example-content,
+    .author-affiliations,
+    .conference-info,
+    .example-indicators {
+        font-size: 1em; /* Changed from 0.85em to 1em */
+    }
+    
+    .paper-header h3 {
+        font-size: 1.5em; /* Increased from 1.3em */
+    }
+    
+    h3, h4 {
+        font-size: 1.4em; /* Increased from 1.2em */
+    }
+    
+    /* Increased input text size */
+    textarea {
+        height: 130px; /* Slightly taller to fit larger text */
+        font-size: 1.1em; /* Increased from 0.95em */
+    }
+    
+    /* Larger button text */
+    .vt-button,
+    .paper-link {
+        padding: 12px 18px;
+        font-size: 1.15em; /* Added increased font size */
+        margin-bottom: 10px;
+    }
+    
+    /* Larger explanation text */
+    .result-explanation {
+        font-size: 1.1em; /* Added to increase explanation text */
+    }
 }
 
 @media (max-width: 1200px) {
     .paper-card {
-        width: 80%;
+        width: 90%;  /* Increased from 80% to 90% */
         max-width: 100%;
     }
 }

@@ -17,7 +17,4 @@ openai>=0.27.8
 requests>=2.29.0
 python-dotenv>=1.0.0
 
-# PyTorch and Hugging Face Transformers
-torch>=2.0.0
-transformers>=4.48.0
-peft>=0.14.0
+gradio_client

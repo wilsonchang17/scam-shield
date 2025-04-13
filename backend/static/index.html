@@ -122,14 +122,19 @@
                 const data = await response.json();
                 const resultElement = document.getElementById('result');
                 const explanationElement = document.getElementById('explanation');
-                
-                resultElement.textContent = data.label;
+                const resultExplanationDiv = document.querySelector('.result-explanation');
+
+                resultElement.textContent = data.label === 'Scam' ? '⚠️ SCAM' : '✅ SAFE';
                 resultElement.className = data.label === 'Scam' ? 'scam' : 'not-scam';
-                
+
+                // Add color to explanation text as well
                 explanationElement.textContent = data.label === 'Scam' 
                     ? 'This message contains elements commonly associated with scams. Be cautious!'
                     : 'This message appears legitimate based on our analysis.';
-                
+
+                resultExplanationDiv.className = 'result-explanation ' + 
+                    (data.label === 'Scam' ? 'scam-explanation' : 'safe-explanation');
+
                 document.getElementById('result-container').classList.remove('hidden');
             } catch (error) {
                 console.error('Error:', error);

@@ -58,7 +58,7 @@ def root_redirect():
 # Research redirect
 @app.get("/research")
 def research_redirect():
-    return RedirectResponse(url="/research.html")
+    return RedirectResponse(url="/research.html?v=1.1")
 
 # Mount static files AFTER defining API routes
 if os.path.exists(static_dir):
