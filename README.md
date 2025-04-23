@@ -67,5 +67,5 @@ Supported by the Commonwealth Cyber Initiative.
 
 ---
 
-✉️ **Contact:** [changcw@vt.edu](mailto:wilsonchang@vt.edu)
+✉️ **Contact:** [wilsonchang@vt.edu](mailto:wilsonchang@vt.edu)
 
