@@ -220,6 +220,135 @@ textarea:focus {
     color: var(--vt-chicago-maroon);
 }
 
+.vote-info {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 18px;
+    padding: 18px 20px;
+    border-radius: 10px;
+    border: 1px solid rgba(134, 31, 65, 0.18);
+    background: linear-gradient(135deg, rgba(252, 241, 233, 0.85), rgba(241, 230, 234, 0.9));
+    color: var(--vt-dark-gray);
+    box-shadow: 0 10px 24px rgba(134, 31, 65, 0.12);
+}
+
+.vote-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.vote-title {
+    font-weight: 700;
+    font-size: 1.05em;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--vt-chicago-maroon);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.vote-title::before {
+    content: "📊";
+    font-size: 1.1em;
+}
+
+.vote-cards {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.vote-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    padding: 16px;
+    border-radius: 12px;
+    background-color: white;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6), 0 6px 12px rgba(0, 0, 0, 0.06);
+    border: 2px solid transparent;
+}
+
+.vote-card-scam {
+    border-color: rgba(199, 44, 65, 0.65);
+}
+
+.vote-card-not {
+    border-color: rgba(45, 147, 108, 0.65);
+}
+
+.vote-count {
+    font-size: 2.2em;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.vote-card-scam .vote-count {
+    color: var(--scam-red);
+}
+
+.vote-card-not .vote-count {
+    color: var(--safe-green);
+}
+
+.vote-label {
+    font-size: 0.95em;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--vt-dark-gray);
+}
+
+.result-status {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+}
+
+.llm-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: rgba(134, 31, 65, 0.12);
+    color: var(--vt-chicago-maroon);
+    font-weight: 600;
+    font-size: 0.95em;
+    letter-spacing: 0.01em;
+}
+
+.llm-badge::before {
+    content: "🤖";
+    font-size: 1.05em;
+}
+
+.consensus-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, var(--vt-burnt-orange), #f29b4b);
+    color: white;
+    font-weight: 600;
+    font-size: 0.95em;
+    letter-spacing: 0.02em;
+    box-shadow: 0 6px 12px rgba(232, 119, 34, 0.28);
+}
+
+.consensus-chip::before {
+    content: "🗳";
+    font-size: 1.05em;
+}
+
 #result {
     font-size: 1.6em;
     font-weight: 700;
@@ -262,6 +391,13 @@ textarea:focus {
     box-shadow: 0 0 10px rgba(45, 147, 108, 0.2);
 }
 
+.pending {
+    background-color: #F6F6F6;
+    color: #666666;
+    border: 3px dashed #CCCCCC;
+    box-shadow: none;
+}
+
 /* Examples Section */
 .examples-section {
     margin-bottom: 40px;
@@ -297,6 +433,15 @@ textarea:focus {
     border-left: 5px solid #5d6d7e;
 }
 
+.example-box.safe {
+    background-color: #f0fff4;
+    border-left: 5px solid var(--safe-green);
+}
+
+.example-box.safe h4 {
+    color: var(--safe-green);
+}
+
 .example-box h4 {
     color: var(--vt-chicago-maroon);
     margin-bottom: 15px;
@@ -326,6 +471,14 @@ textarea:focus {
     background-color: rgba(255, 255, 255, 0.7);
     padding: 10px;
     border-radius: 4px;
+}
+
+.example-box.safe .example-indicators {
+    background-color: rgba(240, 255, 244, 0.85);
+}
+
+.example-box.safe .example-indicators strong {
+    color: var(--safe-green);
 }
 
 .example-indicators strong {

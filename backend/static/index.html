@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Scam Shield - Virginia Tech</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=1.1">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -43,7 +43,26 @@
                 
                 <div id="result-container" class="hidden">
                     <h3>Analysis Result:</h3>
-                    <div id="result">Result will appear here</div>
+                    <div id="vote-info" class="vote-info hidden">
+                        <div class="vote-header">
+                            <span class="vote-title">Model Votes</span>
+                            <span id="consensus-status" class="consensus-chip"></span>
+                        </div>
+                        <div class="vote-cards">
+                            <div class="vote-card vote-card-scam">
+                                <span class="vote-count" id="vote-scam-count">0</span>
+                                <span class="vote-label">Scam</span>
+                            </div>
+                            <div class="vote-card vote-card-not">
+                                <span class="vote-count" id="vote-not-scam-count">0</span>
+                                <span class="vote-label">Not Scam</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="result-status">
+                        <div id="result">Result will appear here</div>
+                        <span id="llm-decision-badge" class="llm-badge hidden"></span>
+                    </div>
                     <div class="result-explanation">
                         <p id="explanation"></p>
                     </div>
@@ -87,6 +106,44 @@
                             <p><strong>Hidden red flags:</strong> Still offering unusually low interest rates, generic company name ("MA"), no verifiable company information, personal email address instead of corporate email</p>
                         </div>
                     </div>
+
+
+
+                    <div class="example-box adversarial">
+                        <h4>Adversarial Scam Example - Toll Violation</h4>
+                        <div class="example-content">
+                            <p>Virginia Department of Transportation Toll Violation Notice:</p>
+                            <p>This is your final notice regarding the unpaid toll balance on your account. You must settle the balance within the next 12 hours to avoid severe penalties.</p>
+                            <p>Unpaid Balance: $6.68<br>Due Date: April 26, 2025</p>
+                            <p>Failure to pay within this time frame will result in the following:</p>
+                            <p>1. Immediate addition of late payment fees to your balance<br>
+                               2. Suspension of your vehicle registration by the Department of Motor Vehicles (DMV)<br>
+                               3. Collection actions, including a negative report to your credit file</p>
+                            <p>Please make your payment promptly to avoid these severe consequences and protect your driving privileges.</p>
+                            <p>Pay Now: https://e-zpassiag.com-etcsay.cc/us</p>
+                            <p>If the link fails, reply with 'Y', exit the SMS, and reopen it to activate the link, or copy and paste it directly into your browser to complete your payment.</p>
+                            <p>This is your last opportunity. Pay now to avoid irreversible consequences.</p>
+                        </div>
+                        <div class="example-indicators">
+                            <p><strong>Hidden red flags:</strong> Suspicious URL, high-pressure tactics (12-hour deadline), threats of severe penalties (registration suspension), impersonation of a government agency.</p>
+                        </div>
+                    </div>
+
+                    <div class="example-box safe">
+                        <h4>None Scam Example</h4>
+                        <div class="example-content">
+                            <p>Hey Wilson,</p>
+                            <p>My name is Garrett Alt and I'm a recruiting manager actively looking to fill a Data Scientist with a Project Management Consulting Firm onsite in Ashburn, VA. The salary range is $90-110k/year, direct hire with benefits. Would a 5 minute call today or tomorrow work for you to speak in more detail about the position?</p>
+                            <p>Garrett Alt<br>Recruiting Manager<br>Latitude Inc.</p>
+                        </div>
+                        <div class="example-indicators">
+                            <p><strong>Positive signals:</strong> Professional tone, specific role details and salary range, verifiable company information, request for a scheduled call rather than urgent action.</p>
+                        </div>
+                    </div>
+
+                    
+
+                    
                 </div>
             </div>
         </main>
@@ -97,15 +154,157 @@
     </div>
 
     <script>
+        let activeTaskId = null;
+        let pollTimerId = null;
+
+        function resetPolling() {
+            activeTaskId = null;
+            if (pollTimerId) {
+                clearTimeout(pollTimerId);
+                pollTimerId = null;
+            }
+        }
+
+        function setResultDisplay(labelText) {
+            const resultElement = document.getElementById('result');
+            if (labelText === 'Scam') {
+                resultElement.textContent = '⚠️ SCAM';
+                resultElement.className = 'scam';
+            } else if (labelText === 'Not Scam') {
+                resultElement.textContent = '✅ SAFE';
+                resultElement.className = 'not-scam';
+            } else {
+                resultElement.textContent = '⌛ PENDING';
+                resultElement.className = 'pending';
+            }
+        }
+
+        function renderClassification(data, isFinal = false) {
+            const explanationElement = document.getElementById('explanation');
+            const resultExplanationDiv = document.querySelector('.result-explanation');
+            const voteInfoElement = document.getElementById('vote-info');
+            const voteScamCountElement = document.getElementById('vote-scam-count');
+            const voteNotScamCountElement = document.getElementById('vote-not-scam-count');
+            const consensusElement = document.getElementById('consensus-status');
+            const llmDecisionBadgeElement = document.getElementById('llm-decision-badge');
+
+            const votes = data.votes || {};
+            const scamVotes = votes.scam !== undefined
+                ? votes.scam
+                : (data.vote_summary ? parseInt(data.vote_summary.match(/Vote Scam: (\d+)/)?.[1] || '0', 10) : 0);
+            const notScamVotes = votes.not_scam !== undefined
+                ? votes.not_scam
+                : (data.vote_summary ? parseInt(data.vote_summary.match(/Vote Not Scam: (\d+)/)?.[1] || '0', 10) : 0);
+
+            voteScamCountElement.textContent = scamVotes;
+            voteNotScamCountElement.textContent = notScamVotes;
+            voteInfoElement.classList.remove('hidden');
+
+            if (data.consensus_status) {
+                consensusElement.textContent = data.consensus_status;
+                consensusElement.classList.remove('hidden');
+            } else {
+                consensusElement.textContent = '';
+                consensusElement.classList.add('hidden');
+            }
+
+            const processingState = data.processing_state || 'completed';
+            const pendingReason = data.pending_reason || false;
+            const pendingDecision = data.pending_decision || false;
+            const rawPrediction = data.raw_prediction;
+            const decisionSource = data.decision_source || '';
+
+            let labelText = data.label;
+            if (!labelText || labelText === 'Unknown') {
+                if (pendingDecision) {
+                    labelText = 'Pending';
+                } else if (pendingReason && rawPrediction === 1) {
+                    labelText = 'Scam';
+                }
+            }
+
+            setResultDisplay(labelText);
+
+            if (pendingDecision) {
+                llmDecisionBadgeElement.textContent = 'Awaiting final decision from LLM...';
+                llmDecisionBadgeElement.classList.remove('hidden');
+            } else if (decisionSource === 'llm') {
+                const badgeText = data.consensus_status || 'Final decision provided by the LLM';
+                llmDecisionBadgeElement.textContent = badgeText;
+                llmDecisionBadgeElement.classList.remove('hidden');
+            } else {
+                llmDecisionBadgeElement.textContent = '';
+                llmDecisionBadgeElement.classList.add('hidden');
+            }
+
+            if (!isFinal && processingState === 'pending_decision') {
+                explanationElement.textContent = 'LLM is reviewing the message for a final decision...';
+                resultExplanationDiv.className = 'result-explanation';
+            } else if (!isFinal && processingState === 'pending_reason') {
+                explanationElement.textContent = 'LLM is generating an explanation...';
+                resultExplanationDiv.className = 'result-explanation scam-explanation';
+            } else if (data.reason) {
+                explanationElement.innerHTML = data.reason.replace(/\n/g, '<br>');
+                const explanationClass = labelText === 'Scam' ? 'scam-explanation' : 'safe-explanation';
+                resultExplanationDiv.className = `result-explanation ${explanationClass}`;
+            } else if (labelText === 'Pending') {
+                explanationElement.textContent = 'Awaiting final decision...';
+                resultExplanationDiv.className = 'result-explanation';
+            } else {
+                explanationElement.textContent = labelText === 'Scam'
+                    ? 'This message contains elements commonly associated with scams. Be cautious!'
+                    : 'This message appears legitimate based on our analysis.';
+                const explanationClass = labelText === 'Scam' ? 'scam-explanation' : 'safe-explanation';
+                resultExplanationDiv.className = `result-explanation ${explanationClass}`;
+            }
+
+            document.getElementById('result-container').classList.remove('hidden');
+        }
+
+        async function pollForResult(taskId) {
+            if (!taskId || taskId !== activeTaskId) {
+                return;
+            }
+
+            try {
+                const response = await fetch(`/classify/status/${taskId}`);
+                if (!response.ok) {
+                    throw new Error(`Status check failed with ${response.status}`);
+                }
+
+                const data = await response.json();
+                if (taskId !== activeTaskId) {
+                    return;
+                }
+
+                if (data.status === 'completed' && data.result) {
+                    resetPolling();
+                    renderClassification(data.result, true);
+                } else if (data.status === 'error') {
+                    resetPolling();
+                    alert('An error occurred while completing the analysis.');
+                } else {
+                    pollTimerId = setTimeout(() => pollForResult(taskId), 1500);
+                }
+            } catch (error) {
+                console.error('Polling error:', error);
+                if (taskId === activeTaskId) {
+                    pollTimerId = setTimeout(() => pollForResult(taskId), 2000);
+                }
+            }
+        }
+
         async function checkMessage() {
             const message = document.getElementById('message').value.trim();
             if (message === '') {
                 alert('Please enter a message to analyze.');
                 return;
             }
-        
+
+            resetPolling();
             document.getElementById('result-container').classList.add('hidden');
-            
+            document.getElementById('vote-info').classList.add('hidden');
+
             try {
                 const response = await fetch('/classify', {
                     method: 'POST',
@@ -114,30 +313,21 @@
                     },
                     body: JSON.stringify({ text: message }),
                 });
-                
+
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
-                
+
                 const data = await response.json();
-                const resultElement = document.getElementById('result');
-                const explanationElement = document.getElementById('explanation');
-                const resultExplanationDiv = document.querySelector('.result-explanation');
+                renderClassification(data, data.processing_state === 'completed');
 
-                resultElement.textContent = data.label === 'Scam' ? '⚠️ SCAM' : '✅ SAFE';
-                resultElement.className = data.label === 'Scam' ? 'scam' : 'not-scam';
-
-                // Add color to explanation text as well
-                explanationElement.textContent = data.label === 'Scam' 
-                    ? 'This message contains elements commonly associated with scams. Be cautious!'
-                    : 'This message appears legitimate based on our analysis.';
-
-                resultExplanationDiv.className = 'result-explanation ' + 
-                    (data.label === 'Scam' ? 'scam-explanation' : 'safe-explanation');
-
-                document.getElementById('result-container').classList.remove('hidden');
+                if (data.task_id && data.processing_state !== 'completed') {
+                    activeTaskId = data.task_id;
+                    pollTimerId = setTimeout(() => pollForResult(data.task_id), 1200);
+                }
             } catch (error) {
                 console.error('Error:', error);
+                resetPolling();
                 alert('An error occurred while analyzing the message.');
             }
         }
