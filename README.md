@@ -4,7 +4,7 @@
 
 🔗 [Research Paper: Exposing LLM Vulnerabilities: Adversarial Scam Detection and Performance](https://ieeexplore.ieee.org/abstract/document/10825256) 
 
-🔗 [Research Paper: Scam Shield: Multi-Model Voting and Fine-Tuned LLMs Against Adversarial Attacks](https://drive.google.com/file/d/1f6by7dW2KReFLf6SulkOSldrE9_sRKgY/view) 
+🔗 [Research Paper: Scam Shield: Multi-Model Voting and Fine-Tuned LLMs Against Adversarial Attacks]([https://drive.google.com/file/d/1f6by7dW2KReFLf6SulkOSldrE9_sRKgY/view](https://arxiv.org/abs/2511.01746)) 
 
 ![research page](pic/research.png)
 
